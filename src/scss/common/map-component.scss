@@ -1,0 +1,27 @@
+@import '~@/node_modules/leaflet/dist/leaflet.css';
+@import '~@/node_modules/leaflet.markercluster/dist/MarkerCluster.css';
+@import '~@/node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css';
+
+.leaflet-control-custom-zoom {
+	.leaflet-control-custom-zoom-home {
+		svg {
+			max-height: 20px;
+			vertical-align: middle;
+		}
+	}
+}
+
+.common-map-component {
+	direction: ltr;
+
+	position: relative;
+
+	.map {
+		width: 100%;
+		min-height: 100vh;
+	}
+}
+
+.common-map-component-light {
+	@extend .common-map-component !optional;
+}
