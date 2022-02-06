@@ -26,6 +26,10 @@ Open browser
 * Allow graphs comparison for multiple selected Miners
 * Integrate CO2 emissions data sources
 
+### Screenshots
+![](https://github.com/adgsm/filecoin-green-energy-simple-dashboard/raw/main/asset/screenshots/Dashboard.PNG)
+![](https://github.com/adgsm/filecoin-green-energy-simple-dashboard/raw/main/asset/screenshots/EnergyWebZero.PNG)
+
 ### License
 Licensed under the MIT license.
 http://www.opensource.org/licenses/mit-license.php
