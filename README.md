@@ -3,6 +3,9 @@ by [Momcilo Dzunic aka smartbee.eth](https://twitter.com/mdzunic)
 
 This simple dashboard is an weekend project inspired by [Alan Ransil's](https://github.com/redransil) [Filecoin Energy Estimation](https://github.com/redransil/filecoin-energy-estimation) project and [Filecoin Power By Region](https://github.com/redransil/filecoin-power-by-region) project. It aims to enable simple graphical overview over Filecoin Service Providers' power consumption vs. use of Renewable Energy Sources, by interconnecting data available at Filecoin Green API, Filecoin Reputation Systems API, and Energy Web Foundation API.
 
+### Demo
+[https://filecoin-green.dzunic.net/](https://filecoin-green.dzunic.net/)
+
 ### Install
 
     npm install .
