@@ -20,6 +20,8 @@ selenium-debug.log
 *.pem
 package-lock.json
 *.code-workspace
+.env
+.env.local
 
 # Editor directories and files
 .idea

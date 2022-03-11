@@ -48,7 +48,7 @@
 							<Column field="recs" header="RECs" :sortable="true">
 								<template #body="slotProps">
 									<div>
-										<Avatar :label="(slotProps.data.recs != undefined) ? `${slotProps.data.recs}` : ''" shape="circle"
+										<Avatar :label="(slotProps.data.recs != undefined) ? `${(slotProps.data.recs > 1000000) ? slotProps.data.recs/1000000 : slotProps.data.recs}` : ''" shape="circle"
 											@click.stop="transactions(slotProps.data)"
 											:style="(slotProps.data.recs > 0) ? 'background-color:#2196F3; color: #ffffff' : 'background-color:#D32F2F; color: #ffffff'">
 										</Avatar>
@@ -120,7 +120,7 @@
 						<div class="row">
 							<div class="row-header">{{ document.fileName }}</div>
 							<div class="row-content clickable"
-								@click="openLink(document.url)"><i class="pi pi-file-pdf"></i></div>
+								@click="openDocument(document.url, 'application/pdf')"><i class="pi pi-file-pdf"></i></div>
 						</div>
 					</div>
 				</Fieldset>

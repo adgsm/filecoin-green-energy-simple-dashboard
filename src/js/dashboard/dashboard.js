@@ -1,5 +1,7 @@
 import { markRaw } from 'vue'
 
+import process from '@/.env.local'
+
 import axios from 'axios'
 import moment from 'moment'
 import language from '@/src/mixins/i18n/language.js'
@@ -166,16 +168,19 @@ const methods = {
 	},
 	getEnergyWebZeroTransactionsData(miner) {
 		const self = this,
-			getUri = `https://zero.energyweb.org/api/partners/filecoin/nodes/${miner}/transactions`;
+			getUri = `https://proofs-api.zerolabs.green/api/partners/filecoin/nodes/${miner}/transactions`;
 		return axios(getUri, {
 			method: 'get'
 		});
 	},
 	getEnergyWebZeroPurchasesData(transaction) {
 		const self = this,
-			getUri = `https://zero.energyweb.org/api/partners/filecoin/purchases/${transaction}`;
+			getUri = `https://proofs-api.zerolabs.green/api/partners/filecoin/purchases/${transaction}`;
 		return axios(getUri, {
-			method: 'get'
+			method: 'get',
+			headers: {
+				'X-API-key': `${process.env.zerolabs.key}`
+			}
 		});
 	},
 	selectMiner(markedLocation) {
@@ -300,6 +305,24 @@ const methods = {
 	},
 	openLink(link) {
 		window.open(link, "_blank");
+	},
+	async openDocument(link, type) {
+		const self = this,
+			getUri = `${link}`;
+		let response = await axios(getUri, {
+			method: 'get',
+			headers: {
+				'X-API-key': `${process.env.zerolabs.key}`
+			},
+			responseType: 'blob'
+		});
+		if(response.status == 200) {
+			let content = [];
+			content.push(response.data);
+			window.open(
+				URL.createObjectURL(new Blob(content, {type: type})),
+				"_blank");
+		}
 	},
 	drawCharts(timeData, series1Data, series2Data) {
 		let option = {
