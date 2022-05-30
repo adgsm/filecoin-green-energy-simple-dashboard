@@ -70,7 +70,7 @@
 					<div class="dialog-block-content-holder">
 						<div class="row">
 							<div class="row-header">Total RECs:</div>
-							<div class="row-content">{{ transactionsData.recs }}</div>
+							<div class="row-content">{{ (transactionsData.recs > 1000000) ? transactionsData.recs/1000000 : transactionsData.recs }}</div>
 						</div>
 						<div class="row">
 							<div class="row-header">Page URL:</div>
@@ -92,7 +92,7 @@
 					<div v-for="transaction in transactionsData.recsData.transactions" class="dialog-block-content-holder" :key="transaction.id">
 						<div class="row">
 							<div class="row-header">RECs:</div>
-							<div class="row-content">{{ transaction.recsSold }}</div>
+							<div class="row-content">{{ transaction.recsSoldWh / 1000000 }}</div>
 						</div>
 						<div class="row">
 							<div class="row-header">Period:</div>

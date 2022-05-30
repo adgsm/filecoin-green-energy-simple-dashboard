@@ -93,7 +93,7 @@ const watch = {
 			this.loadingProgress = 0;
 			let totalEnergyData = [], totalEnergyDataChunk = [], limit = 10000, offset = 0;
 			do {
-				totalEnergyDataChunk = (await this.getFilecoinEnergyData(latestSelected, 0, this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
+				totalEnergyDataChunk = (await this.getFilecoinEnergyData(latestSelected, 'TotalEnergyModelv_1_0_1', this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
 				totalEnergyData = totalEnergyData.concat(totalEnergyDataChunk);
 				offset += limit;
 				this.loadingProgress = Math.round(this.loadingProgress + (100 - this.loadingProgress)/7);
@@ -106,7 +106,7 @@ const watch = {
 			let totalCapacityData = [], totalCapacityDataChunk = [];
 			offset = 0;
 			do {
-				totalCapacityDataChunk = (await this.getFilecoinEnergyData(latestSelected, 3, this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
+				totalCapacityDataChunk = (await this.getFilecoinEnergyData(latestSelected, 'CapacityModel', this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
 				totalCapacityData = totalCapacityData.concat(totalCapacityDataChunk);
 				offset += limit;
 				this.loadingProgress = Math.round(this.loadingProgress + (100 - this.loadingProgress)/7);
@@ -155,8 +155,8 @@ const mounted = function() {
 const methods = {
 	getFilecoinEnergyData(miner, dataType, start, end, limit, offset) {
 		const self = this,
-			getUri = 'https://api.filecoin.energy:443/models/export?id=' +
-				((dataType != undefined) ? dataType : 0) +	// in case of parameter missing -> total energy
+			getUri = 'https://api.filecoin.energy:443/models/export?code_name=' +
+				((dataType != undefined) ? dataType : 'TotalEnergyModelv_1_0_1') +	// in case of parameter missing -> total energy
 				'&miner=' + miner +
 				'&start=' + start +
 				'&end=' + end +
@@ -210,7 +210,7 @@ const methods = {
 			this.loadingProgress = 0;
 			let capacityData, capacityRecords = 0, sumCapacity = 0, avgCapacity = 0, limit = 10000, offset = 0;
 			do {
-				capacityData = (await this.getFilecoinEnergyData(this.markedLocation.id, 3, this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
+				capacityData = (await this.getFilecoinEnergyData(this.markedLocation.id, 'CapacityModel', this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
 				capacityRecords += capacityData.length
 				sumCapacity += capacityData.reduce((prev, elem) => prev + parseFloat(elem.capacity_GiB), 0);
 				offset += limit;
@@ -227,7 +227,7 @@ const methods = {
 			let sealingData, sumSealed = 0, sealedPerDay = 0;
 			offset = 0;
 			do {
-				sealingData = (await this.getFilecoinEnergyData(this.markedLocation.id, 4, this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
+				sealingData = (await this.getFilecoinEnergyData(this.markedLocation.id, 'SealedModel', this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
 				sumSealed = sealingData.reduce((prev, elem) => prev + parseFloat(elem.sealed_this_epoch_GiB), 0);
 				offset += limit;
 				this.loadingProgress = Math.round(this.loadingProgress + (100 - this.loadingProgress)/7);
