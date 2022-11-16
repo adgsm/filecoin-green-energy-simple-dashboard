@@ -18,7 +18,7 @@ import Dialog from 'primevue/dialog'
 import Fieldset from 'primevue/fieldset'
 import ProgressBar from 'primevue/progressbar'
 
-import Datepicker from 'vue3-date-time-picker'
+import Datepicker from '@vuepic/vue-datepicker'
 
 import * as ECharts from 'echarts/core';
 import {
@@ -228,7 +228,7 @@ const methods = {
 			offset = 0;
 			do {
 				sealingData = (await this.getFilecoinEnergyData(this.markedLocation.id, 'SealedModel', this.dateRange[0].toUTCString(), this.dateRange[1].toUTCString(), limit, offset)).data.data;
-				sumSealed = sealingData.reduce((prev, elem) => prev + parseFloat(elem.sealed_this_epoch_GiB), 0);
+				sumSealed = sealingData.reduce((prev, elem) => prev + parseFloat(elem.sealed_GiB), 0);
 				offset += limit;
 				this.loadingProgress = Math.round(this.loadingProgress + (100 - this.loadingProgress)/7);
 			} while (capacityData.length);
